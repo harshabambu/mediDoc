@@ -1,19 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 function Form_mp3() {
   const [file, setFile] = useState(null);
+  const [error, setError] = useState("");
 
   const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
+    const selectedFile = e.target.files[0];
+
+    if (selectedFile) {
+      const allowedTypes = ["audio/mp3", "audio/mpeg", "audio/wav", "audio/ogg"];
+      if (!allowedTypes.includes(selectedFile.type)) {
+        setError("Invalid file type! Please upload an MP3, WAV, or OGG file.");
+        setFile(null);
+        return;
+      }
+
+      setFile(selectedFile);
+      setError("");
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!file) {
-      alert("Please select an MP3 file.");
+      alert("Please select a valid MP3, WAV, or OGG file.");
       return;
     }
-    // Handle file submission here (e.g. upload to server)
     console.log("Uploading:", file);
   };
 
@@ -23,15 +35,17 @@ function Form_mp3() {
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label htmlFor="mp3" className="block text-gray-700 mb-2">
-            Choose MP3 File
+            Choose MP3, WAV, or OGG File
           </label>
           <input
             type="file"
             id="mp3"
-            accept="audio/mp3,audio/*"
+            accept=".mp3,.wav,.ogg"
             onChange={handleFileChange}
             className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:border-blue-300"
           />
+          {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
+          {file && <p className="text-green-600 text-sm mt-2">Selected: {file.name}</p>}
         </div>
         <button
           type="submit"

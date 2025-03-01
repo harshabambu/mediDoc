@@ -23,7 +23,7 @@ function Login() {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-32 border-2 border-red-500 p-8 bg-white rounded-lg shadow-lg">
+    <div className="max-w-md mx-auto mt-80 border-2 border-red-500 p-8 bg-white rounded-lg shadow-lg">
       <h2 className="text-3xl font-bold mb-6 text-center text-red-600">Login</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
