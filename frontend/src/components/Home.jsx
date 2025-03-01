@@ -2,10 +2,11 @@ import React, { useEffect, useRef, useState, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Canvas, useFrame, useLoader } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import Header from "./Header";
+// import { Canvas, useFrame, useLoader } from '@react-three/fiber';
+// import { OrbitControls } from '@react-three/drei';
+// import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+// import Header from "./Header";
+// import Footer from './Footer';
 import {
   FaMicrophone,
   FaRobot,
@@ -13,9 +14,6 @@ import {
   FaShieldAlt,
   FaStethoscope,
   FaQuoteLeft,
-  FaFacebookF,
-  FaTwitter,
-  FaLinkedinIn,
 } from 'react-icons/fa';
 
 // Register GSAP ScrollTrigger plugin
@@ -29,7 +27,7 @@ class ErrorBoundary extends React.Component {
     super(props);
     this.state = { hasError: false };
   }
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError() {
     return { hasError: true };
   }
   componentDidCatch(error, errorInfo) {
@@ -105,7 +103,7 @@ class ErrorBoundary extends React.Component {
           <p className="text-2xl text-white mt-4">
             Leveraging AI, NLP, and immersive tech to revolutionize the OR.
           </p>
-          <button className="mt-8 px-8 py-4 bg-white text-red-600 font-bold rounded-full shadow-lg">
+          <button className="mt-18 px-8 py-4 bg-white text-red-600 font-bold rounded-full shadow-lg">
             Learn More
           </button>
         </div>
@@ -356,32 +354,7 @@ function ContactSection() {
 /* =====================================================================
    FOOTER COMPONENT
    ===================================================================== */
-function Footer() {
-  return (
-    <footer className="bg-gray-800 text-white py-6">
-      <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
-        <div className="mb-4 md:mb-0">
-          <h2 className="text-2xl font-bold">MediDoc AI</h2>
-          <p className="text-gray-400">Revolutionizing Medical Documentation</p>
-        </div>
-        <div className="flex space-x-6">
-          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-red-600">
-            <FaFacebookF />
-          </a>
-          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-red-600">
-            <FaTwitter />
-          </a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-red-600">
-            <FaLinkedinIn />
-          </a>
-        </div>
-      </div>
-      <div className="mt-4 text-center text-gray-500">
-        &copy; 2025 MediDoc AI. All rights reserved.
-      </div>
-    </footer>
-  );
-}
+
 
 /* =====================================================================
    MAIN Home COMPONENT
@@ -406,7 +379,6 @@ function Home() {
 
   return (
     <div className="overflow-x-hidden">
-      <Header />
       <main className="pt-16">
         <HeroSection />
         <FeaturesSection />
@@ -415,7 +387,6 @@ function Home() {
         <TestimonialsSection />
         <ContactSection />
       </main>
-      <Footer />
     </div>
   );
 }
