@@ -2,6 +2,11 @@ import React, { useEffect, useRef, useState, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import img1 from '../assets/vids/img1.jpg'
+import img2 from '../assets/vids/img2.jpg'
+import img3 from '../assets/vids/img3.jpg'
+import img4 from '../assets/vids/img4.jpg'
+import img5 from '../assets/vids/img5.jpg'
 // import { Canvas, useFrame, useLoader } from '@react-three/fiber';
 // import { OrbitControls } from '@react-three/drei';
 // import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
@@ -86,31 +91,45 @@ class ErrorBoundary extends React.Component {
    * HeroSection Component
    * Displays the hero section with the animated human heart in the background and overlay content.
    */
-  function HeroSection() {
-    return (
-      <section
-        id="home"
-        className="relative h-screen flex flex-col justify-center items-center bg-gradient-to-br from-red-500 to-white text-center px-6"
-      >
-        {/* 2D Human Heart Animation */}
-        <HumanHeart2D />
-  
-        {/* Overlay Content */}
-        <div className="relative z-10 max-w-2xl">
-          <h2 className="text-6xl font-bold text-white">
-            Automating Surgical Documentation
-          </h2>
-          <p className="text-2xl text-white mt-4">
-            Leveraging AI, NLP, and immersive tech to revolutionize the OR.
-          </p>
-          <button className="mt-18 px-8 py-4 bg-white text-red-600 font-bold rounded-full shadow-lg">
-            Learn More
-          </button>
-        </div>
-      </section>
-    );
-  }
-  
+
+
+
+
+function HeroSection() {
+  const scrollToFeatures = () => {
+    const featuresSection = document.getElementById('features');
+    if (featuresSection) {
+      featuresSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  return (
+    <section
+      id="home"
+      className="relative h-screen flex flex-col justify-center items-center bg-gradient-to-br from-red-500 to-white text-center px-6"
+    >
+      {/* 2D Human Heart Animation */}
+      <HumanHeart2D />
+
+      {/* Overlay Content */}
+      <div className="relative z-10 max-w-2xl">
+        <h2 className="text-6xl font-bold text-white">
+          Automating Surgical Documentation
+        </h2>
+        <p className="text-2xl text-white mt-4">
+          Leveraging AI, NLP, and immersive tech to revolutionize the OR.
+        </p>
+        <button
+          onClick={scrollToFeatures}
+          className="mt-8 px-8 py-4 bg-white text-red-600 font-bold rounded-full shadow-lg cursor-pointer"
+        >
+          Learn More
+        </button>
+      </div>
+    </section>
+  );
+}
+
 /* =====================================================================
    FEATURES SECTION
    ===================================================================== */
@@ -129,7 +148,7 @@ function FeaturesSection() {
     {
       icon: <FaHeartbeat />,
       title: 'Real-Time Transcription',
-      description: 'Document procedures as they hHomeen, instantly.',
+      description: 'Document procedures as they happen, instantly.',
     },
     {
       icon: <FaShieldAlt />,
@@ -171,6 +190,7 @@ function FeaturesSection() {
     </section>
   );
 }
+
 
 /* =====================================================================
    HOW IT WORKS SECTION
@@ -397,10 +417,66 @@ function ContactSection() {
 }
 
 /* =====================================================================
-   FOOTER COMPONENT
+   VIDEOS COMPONENT
    ===================================================================== */
 
-
+   function Videos() {
+    const videos = [
+      {
+        img: img1,
+        link: "https://youtu.be/isYY2jvd8PU?feature=shared",
+        title: "Live Surgery: Deep Brain Stimulation - Ryder P. Gwinn, MD"
+      },
+      {
+        img: img2,
+        link: "https://youtu.be/UvyLQYuave4?feature=shared",
+        title: "Posterior thoracic scoliosis surgery side loading set 2017"
+      },
+      {
+        img: img3,
+        link: "https://youtu.be/2appWzVbAxw?feature=shared",
+        title: "Brain tumor and awake brain surgery: Resection of metastatic melanoma"
+      },
+      {
+        img: img4,
+        link: "https://youtu.be/8hiaZOEoDNc?feature=shared",
+        title: "LIVE - Total Knee Replacement Surgery by Knee Expert"
+      },
+      {
+        img: img5,
+        link: "https://youtu.be/7B48Ynz8KNk?feature=shared",
+        title: "Living Donor Liver Transplantation Donor and Recipient Procedures"
+      }
+    ];
+  
+    return (
+      <section id="videos" className="py-20 bg-white text-center">
+        <motion.h2
+          initial={{ opacity: 0, x: -100 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.1 }}
+          className="text-4xl font-bold text-red-600 mb-12"
+        >
+          Watch Videos
+        </motion.h2>
+        <div className="flex justify-center">
+          {videos.map((video, index) => (
+            <a key={index} target='_blank' className="relative group w-80 m-4" href={video.link}>
+              <img
+                src={video.img}
+                alt=""
+                className="w-full h-auto rounded-lg shadow-lg transition-transform duration-300"
+              />
+              {/* Bottom Overlay with Title on Hover */}
+              <div className="absolute bottom-0 left-0 w-full bg-gray-800 bg-opacity-60 backdrop-blur-md text-white text-center py-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-b-lg">
+                {video.title}
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+    );
+  }
 /* =====================================================================
    MAIN Home COMPONENT
    ===================================================================== */
@@ -427,6 +503,7 @@ function Home() {
       <main className="pt-16">
         <HeroSection />
         <FeaturesSection />
+        <Videos />
         <HowItWorksSection />
         <TechnologySection />
         <TestimonialsSection />
