@@ -6,6 +6,7 @@ import Home from './components/Home'
 import Login from './components/Login'
 import Register from './components/Register'
 import Form_mp3 from './components/Form_mp3'
+import PdfViewer from './components/PdfViewer'
 function App() {
   const browser=createBrowserRouter([
     {
@@ -27,6 +28,10 @@ function App() {
         {
           path: '/form',
           element: <Form_mp3 />
+        },
+        {
+          path: '/pdf-viewer',
+          element: <PdfViewer />
         }
       ]
     }
