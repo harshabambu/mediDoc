@@ -3,7 +3,7 @@ import React, { useState } from "react";
 function Form_mp3() {
   const [file, setFile] = useState(null);
   const [error, setError] = useState("");
-
+  
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
 
@@ -20,13 +20,41 @@ function Form_mp3() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     if (!file) {
       alert("Please select a valid MP3, WAV, or OGG file.");
       return;
     }
-    console.log("Uploading:", file);
+ 
+    const formData = new FormData();
+    formData.append("audio_file", file);
+
+    try {
+      const response = await fetch("http://127.0.0.1:8000/process_audio/", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (response.ok) {
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        setError("Download your generated PDF below:");
+        
+        // Create a download link
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "AI_Medical_Research_Paper.pdf";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      } else {
+        setError("Error processing file.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      setError("Error uploading file.");
+    }
   };
 
   return (
