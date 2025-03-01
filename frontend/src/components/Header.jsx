@@ -25,7 +25,7 @@ function Header() {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1 }}
       >
-        <h1 className="text-3xl font-bold text-red-600">MediDoc AI</h1>
+        <Link to="/" className="text-3xl font-bold text-red-600">MediDoc AI</Link>
       </motion.div>
       <nav className="space-x-6 text-lg">
         <Link to="/login" href="#features" className="hover:text-red-600">Sign in</Link>

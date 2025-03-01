@@ -225,6 +225,50 @@ function HowItWorksSection() {
   );
 }
 
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
+
+function MedicalCross(props) {
+  const groupRef = useRef();
+
+  // Rotate the cross continuously
+  useFrame((state, delta) => {
+    if (groupRef.current) {
+      groupRef.current.rotation.y += delta * 0.5;
+      groupRef.current.rotation.x += delta * 0.2;
+    }
+  });
+
+  return (
+    <group ref={groupRef} {...props}>
+      {/* Vertical Bar */}
+      <mesh position={[0, 0, 0]}>
+        <boxGeometry args={[0.6, 2, 0.6]} />
+        <meshStandardMaterial color="#e3342f" />
+      </mesh>
+      {/* Horizontal Bar */}
+      <mesh position={[0, 0, 0]}>
+        <boxGeometry args={[2, 0.6, 0.6]} />
+        <meshStandardMaterial color="#e3342f" />
+      </mesh>
+    </group>
+  );
+}
+
+function ThreeDSection() {
+  return (
+    <div className="w-64 h-64"> {/* Increased container size */}
+      <Canvas shadows camera={{ position: [4, 4, 4], fov: 50 }}>
+        <ambientLight intensity={0.7} />
+        <directionalLight position={[5, 5, 5]} intensity={1.5} castShadow />
+        <MedicalCross position={[0, 0, 0]} />
+        <OrbitControls enableZoom={false} />
+      </Canvas>
+    </div>
+  );
+}
+
 /* =====================================================================
    TECHNOLOGY SECTION
    ===================================================================== */
@@ -252,11 +296,12 @@ function TechnologySection() {
         transition={{ duration: 1 }}
         className="flex justify-center items-center"
       >
-        <div className="w-48 h-48 bg-red-600 rounded-full shadow-2xl"></div>
+        <ThreeDSection />
       </motion.div>
     </section>
   );
 }
+
 
 /* =====================================================================
    TESTIMONIALS SECTION
