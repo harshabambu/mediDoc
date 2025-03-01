@@ -25,11 +25,14 @@ function Header() {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1 }}
       >
+      <div className='flex items-center'>
+      <img src="../src/assets/logo.png" alt="" className="flex items-center  justify-centerw-20 h-14" />
         <Link to="/" className="text-3xl font-bold text-red-600">MediDoc AI</Link>
+      </div>
       </motion.div>
-      <nav className="space-x-20 flex flex-wrap text-lg">
-        <Link to="/login" href="#features" className="hover:text-red-600">Sign in</Link>
-        <Link to="/signup" href="#howitworks" className="hover:text-red-600">Sign up</Link>  
+      <nav className="space-x-20 flex flex-wrap text-lg items-center">
+        <Link to="/login" className="hover:text-red-600">Sign in</Link>
+        <Link to="/signup" className="hover:text-red-600">Sign up</Link>  
         <Link to="form" className="">
           <button className="bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700">
             Form Link
