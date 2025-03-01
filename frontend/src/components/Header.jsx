@@ -32,7 +32,7 @@ function Header() {
         <Link to="/signup" href="#howitworks" className="hover:text-red-600">Sign up</Link>  
         <Link to="form" className="">
           <button className="bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700">
-            Form Link
+            Transcribe
           </button>
         </Link>      
       </nav>
